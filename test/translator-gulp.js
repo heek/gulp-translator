@@ -142,7 +142,32 @@ describe('gulp-translator', function() {
       it("should uppercase translated text", function(done){
         var translator = gulpTranslator('./test/locales/en.yml');
         var n = 0;
-        var content = new Buffer("{{{ title  }}} {{{title  | uppercase}}}");
+        var content = new Buffer("{{{ title  }}} {{{title  | uppercase }}}");
+        var translated = "Title TITLE";
+
+        var _transform = function(file, enc, callback) {
+          assert.equal(file.contents.toString('utf8'), translated);
+          n++;
+          callback();
+        };
+
+        var _flush = function(callback) {
+          assert.equal(n, 1);
+          done();
+          callback();
+        };
+
+        var t = through.obj(_transform, _flush);
+        translator.pipe(t);
+        translator.end(new File({
+          contents: content
+        }));
+      });
+
+      xit("should uppercase after lowercase translated text", function(done){
+        var translator = gulpTranslator('./test/locales/en.yml');
+        var n = 0;
+        var content = new Buffer("{{{ title  }}} {{{title | lowercase | uppercase }}}");
         var translated = "Title TITLE";
 
         var _transform = function(file, enc, callback) {
@@ -167,7 +192,7 @@ describe('gulp-translator', function() {
       it("should throw error if unsupported filter", function(done){
         var translator = gulpTranslator('./test/locales/en.yml');
         var n = 0;
-        var content = new Buffer("{{{ title  }}} {{{title  | unsupported}}}");
+        var content = new Buffer("{{{ title  }}} {{{title  | unsupported }}}");
 
         var _transform = function(file, enc, callback) {
           assert.equal(file.contents.toString('utf8'), translated);
