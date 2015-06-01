@@ -45,7 +45,7 @@ gulp.task('translate', function() {
 
 ## Usage
 
-I'm using `{{}}` to avoid conflict with angular-like syntax
+I'm using `{{{}}}` to avoid conflict with angular-like syntax
 
 Following examples assume that "title" in locales equals "new TITLE"
 
