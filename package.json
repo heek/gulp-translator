@@ -1,8 +1,8 @@
 {
     "name": "gulp-translator-d",
     "main": "translator-gulp.js",
-    "version": "0.1.3",
-    "description": "Translate your files by using {{{ syntax }}} and locales/something.yml files.",
+    "version": "0.1.4",
+    "description": "Translate your files by using {{{ syntax }}} and locales/something.yml files. With three curly brace, it won't mix with AngularJS syntax.",
     "licence": "MIT",
     "repository": {
     "type": "git",
@@ -16,6 +16,7 @@
         "html",
         "translate",
         "translator",
+        "angularjs",
         "gulp"
     ],
     "author": "arathunku <arathunku@gmail.com>",
