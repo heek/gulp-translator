@@ -1,5 +1,6 @@
 first: first
 title: "Title"
+specialchar: "Author's name"
 errors:
   username:
     uniquness: "Username is not unique."

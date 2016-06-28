@@ -2,6 +2,7 @@ var File = require('vinyl');
 var through = require('through2');
 var assert = require('assert');
 var Stream = require('stream');
+var gutil = require('gulp-util');
 
 var gulpTranslator = require('../translator-gulp.js');
 
@@ -187,6 +188,35 @@ describe('gulp-translator', function() {
         translator.end(new File({
           contents: content
         }));
+      });
+
+      it("should add slashes translated text", function(done){
+        try {
+          var translator = gulpTranslator('./test/locales/en.yml');
+          var n = 0;
+          var content = new Buffer("{{{ specialchar  }}} {{{ specialchar | addslashes }}}");
+          var translated = "Author's name Author\\'s name";
+
+          var _transform = function(file, enc, callback) {
+            assert.equal(file.contents.toString('utf8'), translated);
+            n++;
+            callback();
+          };
+
+          var _flush = function(callback) {
+            assert.equal(n, 1);
+            done();
+            callback();
+          };
+
+          var t = through.obj(_transform, _flush);
+          translator.pipe(t);
+          translator.end(new File({
+            contents: content
+          }));
+        } catch (e) {
+        }
+
       });
 
       it("should throw error if unsupported filter", function(done){

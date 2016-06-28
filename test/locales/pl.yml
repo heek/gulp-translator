@@ -1,5 +1,6 @@
-title: "Tytul"
 first: pierwszy
+title: "Tytul"
+specialchar: "Imię i nazwisko autora"
 errors:
   username:
     uniquness: "Nazwa uzytkownika nie jest unikalna"

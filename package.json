@@ -33,6 +33,6 @@
         "vinyl": "~0.2.3"
     },
     "scripts": {
-        "test": "./node_modules/.bin/mocha --reporter spec --timeout 100"
+        "test": "./node_modules/.bin/mocha --reporter spec --timeout 1000"
     }
 }
