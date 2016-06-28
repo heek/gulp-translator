@@ -67,6 +67,11 @@ If you'd like to use filters(look at the bottom to check available filters) just
 
 ```
 
+```
+{{{ Author's name | addslashes }}} will be change to "Author\'s name"
+
+```
+
 If you're still not sure, please look at tests.
 
 ## API
@@ -84,17 +89,7 @@ The string is a path to a nameOfTheFile.yml with your locales. Please look at te
 
   - lowercase
   - uppercase
-
-## TODO:
-
-  - refactor tests
-  - work on matchers (sigh...)
-  - add filters:
-    - capitalize
-    - reverse
-
-  - add option to dynamically add filters
-  - filter chain
+  - addslashes
 
 # License
   MIT
