@@ -1,12 +1,19 @@
-# Gulp Translator-d
+# Gulp Translator-d (Forked for Heek)
 > Almost like string replace but using locales
 
 ## Usage
 
-First, install `gulp-translator-d` as a development dependency:
+First, install `gulp-translator-d` as a development dependency...
+
+... with shell
 
 ```shell
-npm install --save-dev gulp-translator-d
+npm install --save "git+https:///0f8e29a28614785dbd33fd6e89fe9ad82000cceb:x-oauth-basic@github.com/heek/gulp-translator.git"
+```
+... directly in package.json
+
+```javascript
+"gulp-translator-d": "git+https://0f8e29a28614785dbd33fd6e89fe9ad82000cceb:x-oauth-basic@github.com/heek/gulp-translator.git",
 ```
 
 Then, add it to your `gulpfile.js`:
@@ -43,6 +50,52 @@ gulp.task('translate', function() {
 });
 ```
 
+Config (Heek front):
+```javascript
+'use strict';
+
+const gulp = require('gulp');
+const rename = require('gulp-rename');
+const translate = require('gulp-translator-d');
+const gutil = require('gulp-util');
+
+gulp.task('translateEn', ['clean:translateEn', 'yamlEn'], () =>
+  gulp.src('views/**/*.ejs')
+    .pipe(rename((path) => {
+      path.extname = '.html';
+    }))
+    .pipe(
+      translate('.tmp/private/locales/yml/en/en.yml')
+      .on('error', (error) =>
+        gutil.log(error)
+      )
+    )
+    .pipe(rename((path) => {
+      path.extname = '.ejs';
+    }))
+    .pipe(gulp.dest('.tmp/public/views/en'))
+);
+
+gulp.task('translateFr', ['clean:translateFr', 'yamlFr'], () =>
+  gulp.src('views/**/*.ejs')
+    .pipe(rename((path) => {
+      path.extname = '.html';
+    }))
+    .pipe(
+      translate('.tmp/private/locales/yml/fr/fr.yml')
+      .on('error', (error) =>
+        gutil.log(error)
+      )
+    )
+    .pipe(rename((path) => {
+      path.extname = '.ejs';
+    }))
+    .pipe(gulp.dest('.tmp/public/views/fr'))
+);
+
+gulp.task('translate', ['translateFr', 'translateEn']);
+```
+
 ## Usage
 
 I'm using `{{{}}}` to avoid conflict with angular-like syntax
@@ -61,7 +114,6 @@ If you'd like to use filters(look at the bottom to check available filters) just
 
 ```
 
-
 ```
 {{{ title | uppercase }}} will be change to "NEW TITLE"
 
@@ -71,8 +123,6 @@ If you'd like to use filters(look at the bottom to check available filters) just
 {{{ Author's name | addslashes }}} will be change to "Author\'s name"
 
 ```
-
-If you're still not sure, please look at tests.
 
 ## API
 
@@ -90,6 +140,15 @@ The string is a path to a nameOfTheFile.yml with your locales. Please look at te
   - lowercase
   - uppercase
   - addslashes
+
+## Run test:
+
+```shell
+npm install
+```
+```shell
+npm test
+```
 
 # License
   MIT
