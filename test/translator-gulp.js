@@ -37,7 +37,7 @@ describe('gulp-translator', function() {
     it('should interpolate strings - ENGLISH', function(done) {
       var translator = gulpTranslator('./test/locales/en.yml');
       var n = 0;
-      var content = new Buffer("{{{ user.title  }}} {{{title }}}");
+      var content = new Buffer("[[[ user.title  ]]] [[[title ]]]");
       var translated =  "ENGLISH USER TITLE Title";
 
       var _transform = function(file, enc, callback) {
@@ -62,7 +62,7 @@ describe('gulp-translator', function() {
     it('should interpolate strings - POLISH', function(done) {
       var translator = gulpTranslator('./test/locales/pl.yml');
       var n = 0;
-      var content = new Buffer("{{{ user.title  }}} {{{title }}}");
+      var content = new Buffer("[[[ user.title  ]]] [[[title ]]]");
       var translated = "POLSKI TYTUL Tytul";
 
       var _transform = function(file, enc, callback) {
@@ -87,7 +87,7 @@ describe('gulp-translator', function() {
     it("should throw error about undefined locale", function(done){
       var translator = gulpTranslator('./test/locales/pl.yml');
       var n = 0;
-      var content = new Buffer("{{{ unsupported  }}}");
+      var content = new Buffer("[[[ unsupported  ]]]");
 
       var _transform = function(file, enc, callback) {
         n++;
@@ -102,7 +102,7 @@ describe('gulp-translator', function() {
 
       translator.on('error', function(err){
         assert.equal(err.message,
-          'Cannot find that key in locales {{{ unsupported  }}} and is used in /path');
+          'Cannot find that key in locales [[[ unsupported  ]]] and is used in /path');
         done();
       });
 
@@ -118,7 +118,7 @@ describe('gulp-translator', function() {
       it("should lowecase translated text", function(done){
         var translator = gulpTranslator('./test/locales/en.yml');
         var n = 0;
-        var content = new Buffer("{{{ title  }}} {{{title | lowercase}}}");
+        var content = new Buffer("[[[ title  ]]] [[[title | lowercase]]]");
         var translated = "Title title";
 
         var _transform = function(file, enc, callback) {
@@ -143,7 +143,7 @@ describe('gulp-translator', function() {
       it("should uppercase translated text", function(done){
         var translator = gulpTranslator('./test/locales/en.yml');
         var n = 0;
-        var content = new Buffer("{{{ title  }}} {{{title  | uppercase }}}");
+        var content = new Buffer("[[[ title  ]]] [[[title  | uppercase ]]]");
         var translated = "Title TITLE";
 
         var _transform = function(file, enc, callback) {
@@ -168,7 +168,7 @@ describe('gulp-translator', function() {
       xit("should uppercase after lowercase translated text", function(done){
         var translator = gulpTranslator('./test/locales/en.yml');
         var n = 0;
-        var content = new Buffer("{{{ title  }}} {{{title | lowercase | uppercase }}}");
+        var content = new Buffer("[[[ title  ]]] [[[title | lowercase | uppercase ]]]");
         var translated = "Title TITLE";
 
         var _transform = function(file, enc, callback) {
@@ -194,7 +194,7 @@ describe('gulp-translator', function() {
         try {
           var translator = gulpTranslator('./test/locales/en.yml');
           var n = 0;
-          var content = new Buffer("{{{ specialchar  }}} {{{ specialchar | addslashes }}}");
+          var content = new Buffer("[[[ specialchar  ]]] [[[ specialchar | addslashes ]]]");
           var translated = "Author's name Author\\'s name";
 
           var _transform = function(file, enc, callback) {
@@ -222,7 +222,7 @@ describe('gulp-translator', function() {
       it("should throw error if unsupported filter", function(done){
         var translator = gulpTranslator('./test/locales/en.yml');
         var n = 0;
-        var content = new Buffer("{{{ title  }}} {{{title  | unsupported }}}");
+        var content = new Buffer("[[[ title  ]]] [[[title  | unsupported ]]]");
 
         var _transform = function(file, enc, callback) {
           assert.equal(file.contents.toString('utf8'), translated);
@@ -253,7 +253,7 @@ describe('gulp-translator', function() {
   describe('with stream contents', function() {
     it('should emit errors', function(done) {
       var translator = gulpTranslator('./test/locales/en.yml');
-      var content = Readable("{{{ title }}} {{{title}}}");
+      var content = Readable("[[[ title ]]] [[[title]]]");
 
       var n = 0;
 

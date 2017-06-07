@@ -98,29 +98,29 @@ gulp.task('translate', ['translateFr', 'translateEn']);
 
 ## Usage
 
-I'm using `{{{}}}` to avoid conflict with angular-like syntax
+I'm using `[[[]]]` to avoid conflict with angular-like syntax
 
 Following examples assume that "title" in locales equals "new TITLE"
 
 Example:
 ```
-{{{ title }}} will be change to "new TITLE"
+[[[ title ]]] will be change to "new TITLE"
 
 ```
 If you'd like to use filters(look at the bottom to check available filters) just pass them after like that:
 
 ```
-{{{ title | lowercase }}} will be change to "new title"
+[[[ title | lowercase ]]] will be change to "new title"
 
 ```
 
 ```
-{{{ title | uppercase }}} will be change to "NEW TITLE"
+[[[ title | uppercase ]]] will be change to "NEW TITLE"
 
 ```
 
 ```
-{{{ Author's name | addslashes }}} will be change to "Author\'s name"
+[[[ Author's name | addslashes ]]] will be change to "Author\'s name"
 
 ```
 
