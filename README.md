@@ -8,12 +8,12 @@ First, install `gulp-translator-d` as a development dependency...
 ... with shell
 
 ```shell
-npm install --save "git+https:///0f8e29a28614785dbd33fd6e89fe9ad82000cceb:x-oauth-basic@github.com/heek/gulp-translator.git"
+npm install --save "git+https://github.com/heek/gulp-translator.git"
 ```
 ... directly in package.json
 
 ```javascript
-"gulp-translator-d": "git+https://0f8e29a28614785dbd33fd6e89fe9ad82000cceb:x-oauth-basic@github.com/heek/gulp-translator.git",
+"gulp-translator-d": "git+https://github.com/heek/gulp-translator.git",
 ```
 
 Then, add it to your `gulpfile.js`:
